@@ -1,40 +1,30 @@
 import React, { useState } from 'react';
 import './Expenses.css';
-import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
-import ExpensesFilter from './ExpenseFilter';
+import ExpenseFilter from './ExpenseFilter';
+import ExpensesList from './ExpensesList';  // Õige import
+
 
 const Expenses = (props) => {
-  const [filteredYear, setFilteredYear] = useState('2023'); // Algväärtus
+  const [filteredYear, setFilteredYear] = useState('2024'); // Algväärtus
 
   // Funktsioon, mis uuendab valitud aasta
-  const filterChangeHandler = (selectedYear) => {
-    setFilteredYear(selectedYear);
-  };
+  const filterChangeHandler = (year) => {
+    console.log("Year data in Expenses.js: " + year);
+    setFilteredYear(year);
+  }
 
-  // Filtreeritud kulutused vastavalt valitud aastale
-  const filteredExpenses = props.items.filter((expense) => {
-    return expense.date.getFullYear().toString() === filteredYear;
+  const filteredExpenses = props.expenses.filter((expense) => {
+    return expense.date.getFullYear() == filteredYear;
   });
 
   return (
-    <div>
-      {/* Lisame ExpensesFilter komponendi */}
-      <ExpensesFilter 
-        selected={filteredYear} 
-        onChangeFilter={filterChangeHandler} 
-      />
-      <Card className='expenses'>
-        {filteredExpenses.length === 0 ? (
-          <p text="white">No expenses found for {filteredYear}.</p>
-        ) : (
-          filteredExpenses.map((expense, index) => (
-            <ExpenseItem key={index} data={expense} />
-          ))
-        )}
-      </Card>
-    </div>
+    <Card className="expenses">
+
+      <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+      <ExpensesList expenses={filteredExpenses} /> 
+    </Card>
   );
-};
+}
 
 export default Expenses;

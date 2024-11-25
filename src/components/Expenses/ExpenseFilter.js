@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ExpenseFilter.css';
 
-const ExpensesFilter = (props) => {
+const ExpenseFilter = (props) => {
     const dropdownChangeHandler = (event) => {
         const selectedYear = event.target.value;
         console.log('Year changed in ExpensesFilter:', selectedYear);
@@ -24,4 +24,4 @@ const ExpensesFilter = (props) => {
     );
 };
 
-export default ExpensesFilter;
+export default ExpenseFilter;

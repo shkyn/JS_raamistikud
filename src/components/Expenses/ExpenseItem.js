@@ -1,27 +1,17 @@
-import './ExpenseItem.css';
-import ExpenseDate from './ExpenseDate';
-import Card from '../UI/Card';
-import { useState } from 'react';
+import './ExpenseItem.css'
+import ExpenseDate from "./ExpenseDate";
 
-const ExpenseItem = (props) => {
-    const [title, setTitle] = useState(props.data.title);
-
-    const clickHandler = () => {
-        console.log('Clicked!');
-        // setTitle(`Updated by click: ${title}`); muutetud et see ei oleks visuaalne
-        console.log(title);
-    };
+function ExpenseItem(props){
 
     return (
-        <Card className='expense-item'>
-            <ExpenseDate date={props.data.date} />
-            <div className='expense-item_description'>
-                <h2>{title}</h2>
-                <div className='expense-item_price'>${props.data.price}</div>
+        <div className="expense-item">
+            <ExpenseDate date={props.expenseData.date}></ExpenseDate>
+            <div className="expense-item__description">
+                <h2>{props.expenseData.title}</h2>
+                <div className="expense-item__price">{props.expenseData.price}€</div>
             </div>
-            <button onClick={clickHandler}>Click Me</button>
-        </Card>
-    );
-};
+        </div>
+    )
+}
 
-export default ExpenseItem;
+export default ExpenseItem
