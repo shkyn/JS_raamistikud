@@ -6,4 +6,20 @@
     background-color: #313131;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    p{color: white;}
   }
+  .expenses {
+    width: 100%;
+    max-width: 50rem; /* Piira maksimaalne laius */
+    margin: 1rem auto; /* Keskenda elemendid */
+    padding: 1rem;
+    box-sizing: border-box; /* Veendu, et padding ei mõjuta üldlaiust */
+  }
+  
+  .expenses-filter {
+    width: 100%;
+    max-width: 50rem; /* Sama mis Card */
+    margin: 1rem auto; /* Keskenda samamoodi */
+  }
+  
