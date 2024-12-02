@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from "./components/NewExpense/NewExpense"
@@ -25,33 +25,25 @@ const DYMMY_EXPNESES = [
 ];
 
 const App = () => {
-  const [expenses, setExpenses] = useState(DYMMY_EXPNESES);
-  const [isEditing, setIsEditing] = useState(false);  // Uus muutuja vormi hallamiseks
+  const [expenses, setExpenses] = useState(() => {
+    const expensesFromLS = JSON.parse(localStorage.getItem("expenses"))
+    return expensesFromLS || []
+  })
+  
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses))
+  }, [expenses])
 
   const addExpenseHandler = (expense) => {
     setExpenses((previousExpenses) => {
       return [expense, ...previousExpenses];
     });
-    setIsEditing(false); // Pärast andmete lisamist suletakse vorm
-  };
-
-  const startEditingHandler = () => {
-    setIsEditing(true); // Avab vormi
-  };
-
-  const stopEditingHandler = () => {
-    setIsEditing(false); // Suletakse vorm, kui Cancel nupp vajutatakse
   };
 
   return (
     <div className="App">
-      {!isEditing && <button onClick={startEditingHandler}>Add New Expense</button>}
-      {isEditing && (
-        <NewExpense
-          onAddExpense={addExpenseHandler}
-          onCancel={stopEditingHandler}
-        />
-      )}
+      <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <Expenses expenses={expenses} />
     </div>
   );

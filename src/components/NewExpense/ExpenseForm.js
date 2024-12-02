@@ -2,7 +2,7 @@ import "./ExpenseForm.css"
 import { Fragment, useRef, useState } from "react"
 import Error from "../UI/Error"
 
-const ExpenseForm = (props) => {
+const NewExpense = (props) => {
   const [error, setError] = useState(null)
   console.log(error)
 
